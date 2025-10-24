@@ -1,8 +1,10 @@
-# Airflow YouTube Comments ETL Project
+# 🧠 Airflow YouTube Comments ETL Project
 
 This project implements an **Extract, Transform, Load (ETL)** pipeline using **Apache Airflow** to retrieve, clean, and store data from YouTube comments via the **YouTube Data API v3**.
 
 This project modernizes a common tutorial (originally using the Twitter API) by demonstrating a practical, containerized approach to ETL with Airflow for real-world social data.
+
+👉 [This is the video I'm referencing](https://www.youtube.com/watch?v=q8q3OFFfY6c)
 
 ## 💡 Project Motivation and Goal
 
@@ -128,3 +130,52 @@ Upon successful completion of the DAG run, your final data will be available on 
 ``` bash
 cd airflow/dags/data/
 ```
+
+---
+## 🛑 Troubleshooting Common Issues
+
+This section addresses specific issues that users commonly encounter when setting up and running this Airflow pipeline.
+
+### 1. How to resolve Permission Errors 
+`` PermissionError: [Errno 13] Permission denied: '/opt/airflow/dags/data'``
+
+This error occurs when the Airflow user inside the Docker container tries to create or write to the ``/opt/airflow/dags/data`` folder but doesn't have the necessary permissions on the host machine. This is a common issue with Docker volume mounting on Linux and macOS.
+
+### Solution (Recommended)
+
+Manually create the data folder on your host machine and apply liberal permissions to allow Docker access:
+``` bash
+# 1. Create the data directory (if it doesn't already exist)
+mkdir -p ./dags/data
+
+# 2. Grant full read/write/execute permissions (777)
+chmod -R 777 ./dags/data
+
+# 3. Restart Docker Compose to apply changes
+docker-compose down
+docker-compose up -d
+```
+
+### Cleaner Code Solution (Optional)
+
+To make the script more robust, update the ``DATA_DIR`` definition in your ``dags/youtube_etl_dag.py`` to use relative paths. This ensures the directory is created adjacent to the DAG file:
+``` python
+import os
+
+# Change this line in youtube_etl_dag.py
+DATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
+os.makedirs(DATA_DIR, exist_ok=True)
+# ... rest of the DAG code
+```
+
+### 2. How to Find the YouTube Video ID (VIDEO_ID)
+
+The ``VIDEO_ID`` is a unique, 11-character alphanumeric identifier required by the YouTube Data API for the extraction process.
+
+| URL Type | ExampleURL | Video ID |
+| :--- | :--- | :--- |
+| **Standard Watch URL** | https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=1sdQw4w9WgXcQ (After v=) |
+| **Shortened URL** | https://youtu.be/dQw4w9WgXcQdQw4w9WgXcQ (After .be/) |
+| **Playlist URL** | https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=...dQw4w9WgXcQ (After v=) |
+
+**Rule:** Look for the 11-character string that follows either v= or the final / in the URL.
