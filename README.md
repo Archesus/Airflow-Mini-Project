@@ -13,7 +13,7 @@ The primary goal is to run a scheduled ETL workflow that transforms raw data int
 | Stage | Data Source | Tool/Output |
 | :--- | :--- | :--- |
 | **Extract** | YouTube Data API v3 | `raw_youtube_comments.csv` |
-| **Transform** | Raw CSV data (Pandas) | Cleans/processes data |
+| **Transform** | Raw CSV data (Pandas) | `clean_processesed_data.csv` |
 | **Load** | Cleaned CSV data | `comments_final.json` (Local storage/Mock Load) |
 
 ---
@@ -43,11 +43,11 @@ Your local directory (e.g., `airflow/`) should have this structure for the Airfl
 ``` bash
 airflow/
 ├── dags/
-│ ├── youtube_etl_dag.py # The core Airflow DAG definition
-│ ├── extract_youtube_comments.py # Python logic for API calls
-│ └── data/ # Output directory for ETL results
-├── docker-compose.yml # Defines Airflow, Postgres, and setup services
-└── requirements.txt # Project dependencies
+│ ├── youtube_etl_dag.py                 # The core Airflow DAG definition
+│ ├── extract_youtube_comments.py        # Python logic for API calls
+│ └── data/                              # Output directory for ETL results
+├── docker-compose.yml                   # Defines Airflow, Postgres, and setup services
+└── requirements.txt                     # Project dependencies
 ```
 
 ### Required Dependencies (`requirements.txt`)
