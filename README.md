@@ -29,7 +29,7 @@ Before starting, ensure you have the following installed and configured:
 
 You must obtain a developer API key to access YouTube data:
 
-1.  Go to the **Google Cloud Console**.
+1.  Go to the [**Google Cloud Console**](https://console.cloud.google.com/).
 2.  Create a new project.
 3.  Navigate to **APIs & Services** → **Library** and **Enable** the **YouTube Data API v3**.
 4.  Go to **APIs & Services** → **Credentials** → **Create Credentials** → **API Key**.
@@ -174,8 +174,8 @@ The ``VIDEO_ID`` is a unique, 11-character alphanumeric identifier required by t
 
 | URL Type | ExampleURL | Video ID |
 | :--- | :--- | :--- |
-| **Standard Watch URL** | https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=1sdQw4w9WgXcQ (After v=) |
-| **Shortened URL** | https://youtu.be/dQw4w9WgXcQdQw4w9WgXcQ (After .be/) |
-| **Playlist URL** | https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=...dQw4w9WgXcQ (After v=) |
+| **Standard Watch URL** | https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=1sdQw4w9WgXcQ | (After v=) |
+| **Shortened URL** | https://youtu.be/dQw4w9WgXcQdQw4w9WgXcQ | (After .be/) |
+| **Playlist URL** | https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=...dQw4w9WgXcQ | (After v=) |
 
 **Rule:** Look for the 11-character string that follows either v= or the final / in the URL.
