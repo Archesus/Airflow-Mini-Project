@@ -5,8 +5,8 @@ import pandas as pd
 import os
 from extract_youtube_comments import fetch_youtube_comments
 
-API_KEY = "AIzaSyDM-N1m7q5hRveHSg8gRsS_6S8QwQoVFik"   # 🔒 Replace with your real API key
-VIDEO_ID = "q8q3OFFfY6c"      # Example: "dQw4w9WgXcQ"
+API_KEY = "YOUR_API_KEY"   # 🔒 Replace with your real API key
+VIDEO_ID = "video_id"      # Example: "dQw4w9WgXcQ"
 
 DATA_DIR = "/opt/airflow/dags/data"
 os.makedirs(DATA_DIR, exist_ok=True)
